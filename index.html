@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Радіаційна небезпека | Igor Prais</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --hazard-yellow: #DFFF00;
+            --toxic-green: #39ff14;
+            --dark-bg: #0a0a0a;
+            --panel-bg: #151515;
+            --white: #ffffff;
+            --danger-red: #ff4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--dark-bg); color: var(--white); overflow-x: hidden; }
+
+        /* Навігація */
+        nav {
+            position: fixed; top: 15px; left: 50%; transform: translateX(-50%);
+            background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(15px);
+            border: 1px solid var(--hazard-yellow); padding: 5px; border-radius: 100px;
+            z-index: 1000; display: flex; gap: 5px; width: 95%; max-width: fit-content;
+        }
+        nav a { 
+            color: var(--hazard-yellow); text-decoration: none; 
+            font-size: clamp(8px, 2vw, 11px); font-weight: 900; 
+            text-transform: uppercase; padding: 10px 15px; border-radius: 100px; transition: 0.3s;
+        }
+        nav a.active { background: var(--hazard-yellow); color: var(--dark-bg); box-shadow: 0 0 15px var(--hazard-yellow); }
+
+        section { min-height: 100vh; padding: 120px 8%; display: flex; align-items: center; justify-content: center; position: relative; }
+
+        /* Hero */
+        #hero { background: radial-gradient(circle at center, #1a1a00 0%, var(--dark-bg) 100%); border-bottom: 2px solid var(--hazard-yellow); }
+        .hero-content { text-align: left; width: 100%; max-width: 1100px; }
+        h1 { font-size: clamp(1.8rem, 6vw, 4rem); font-weight: 900; line-height: 1; color: var(--hazard-yellow); text-transform: uppercase; margin-bottom: 20px; }
+        .highlight { border: 2px solid var(--hazard-yellow); padding: 5px 15px; display: inline-block; }
+        
+        .intro-card { background: var(--panel-bg); padding: clamp(20px, 5vw, 40px); border-radius: 20px; border-left: 10px solid var(--hazard-yellow); margin-top: 40px; }
+
+        /* Bento Grid */
+        .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; width: 100%; }
+        .card { grid-column: span 12; background: var(--panel-bg); padding: 30px; border-radius: 20px; border: 1px solid #333; transition: 0.4s; text-align: left; }
+        .card:hover { border-color: var(--toxic-green); box-shadow: 0 0 30px rgba(57, 255, 20, 0.1); }
+        .span-4 { grid-column: span 4; }
+        .span-6 { grid-column: span 6; }
+
+        h2 { font-size: clamp(1.4rem, 4vw, 2.5rem); font-weight: 900; margin-bottom: 40px; color: var(--hazard-yellow); text-transform: uppercase; text-align: left; }
+        h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--toxic-green); display: flex; align-items: center; gap: 10px; }
+        h3::before { content: '☢'; font-size: 1.5rem; }
+
+        p { font-size: 1.1rem; line-height: 1.6; color: #ccc; margin-bottom: 10px; }
+        strong { color: var(--hazard-yellow); }
+
+        .warning-box { background: rgba(255, 68, 68, 0.1); border: 2px dashed var(--danger-red); padding: 25px; border-radius: 20px; color: var(--danger-red); margin-top: 20px; }
+
+        .footer { padding: 60px 20px; text-align: center; font-weight: 900; color: var(--hazard-yellow); opacity: 0.4; text-transform: uppercase; letter-spacing: 5px; font-size: 0.7rem; }
+
+        @media (max-width: 900px) { .span-4, .span-6 { grid-column: span 12; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#hero" class="nav-link active">Вступ</a>
+        <a href="#part1" class="nav-link">Одиниці</a>
+        <a href="#part2" class="nav-link">Біологія</a>
+        <a href="#part3" class="nav-link">Аварії</a>
+        <a href="#part4" class="nav-link">Захист</a>
+        <a href="#conclusion" class="nav-link">Висновок</a>
+    </nav>
+
+    <section id="hero" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+    <div class="hero-content" data-aos="fade-up" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+        
+        <h1 style="text-align: center;">
+            Радіаційна небезпека: <br>
+            <span class="highlight">від фізичних основ до захисту</span>
+        </h1>
+
+        <div class="intro-card" data-tilt style="margin-left: auto; margin-right: auto; text-align: center; border-left: none; border-top: 10px solid var(--hazard-yellow);">
+            <h2 style="text-align: center;">Вступ</h2>
+            <p style="text-align: center; margin: 0 auto;">
+                У сучасному світі радіація є одним із найбільш вагомих техногенних факторів ризику. У курсі безпеки життєдіяльності (БЖД) іонізуюче випромінювання розглядається як конкретний фізичний чинник, що потребує чіткого розуміння його природи. Знання механізмів впливу радіації на організм та правил поведінки у разі аварій на атомних електростанціях є критично важливим для забезпечення безпеки особистості та суспільства.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+    <section id="part1">
+        <div style="width: 100%;">
+            <h2 data-aos="fade-right">1. Класифікація та одиниці вимірювання радіації</h2>
+            <div class="bento">
+                <div class="card span-12">
+                    <p>Підступність радіації полягає у відсутності кольору, запаху та миттєвих больових відчуттів при впливі. Для оцінки масштабу небезпеки в БЖД використовують такі основні показники:</p>
+                </div>
+                <div class="card span-4" data-aos="zoom-in" data-tilt>
+                    <h3>Рентген</h3>
+                    <p><strong>Експозиційна доза:</strong> характеризує іонізаційний ефект випромінювання у повітрі.</p>
+                </div>
+                <div class="card span-4" data-aos="zoom-in" data-aos-delay="100" data-tilt>
+                    <h3>Грей / Рад</h3>
+                    <p><strong>Поглинута доза:</strong> визначає кількість енергії випромінювання, яку безпосередньо поглинула одиниця маси тіла.</p>
+                </div>
+                <div class="card span-4" data-aos="zoom-in" data-aos-delay="200" data-tilt>
+                    <h3>Зіверт / Бер</h3>
+                    <p><strong>Еквівалентна доза:</strong> найбільш точний показник для медицини та БЖД, оскільки він враховує біологічний ефект. Саме в Зівертах розраховується реальна шкода для здоров’я людини.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <section id="part2" style="background: #050505;">
+        <div style="width: 100%;">
+            <h2 data-aos="fade-left">2. Біологічна дія на організм людини</h2>
+            <div class="bento">
+                <div class="card span-12">
+                    <p>Механізм руйнівної дії радіації на клітинному рівні поділяється на два типи:</p>
+                </div>
+                <div class="card span-6" data-aos="fade-right">
+                    <h3>1. Пряма дія</h3>
+                    <p>Безпосереднє руйнування молекул ДНК і білків під впливом частинок. Це призводить до загибелі клітин або їх мутацій, що в перспективі викликає онкологічні захворювання.</p>
+                </div>
+                <div class="card span-6" data-aos="fade-left">
+                    <h3>2. Непряма дія</h3>
+                    <p>Радіоліз води в організмі. Оскільки людина на 70-80% складається з води, випромінювання створює вільні радикали та активні форми кисню. Ці речовини хімічно агресивно діють на клітинні мембрани, фактично руйнуючи клітини зсередини.</p>
+                </div>
+                <div class="card span-12" style="border-left: 10px solid var(--toxic-green);">
+                    <p>Найбільш чутливими до радіації є органи з інтенсивним поділом клітин: <strong>кістковий мозок (кровотворна система)</strong> та слизова оболонка кишечника.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <section id="part3">
+        <div style="width: 100%;">
+            <h2 data-aos="fade-up">3. Характеристика аварій на об’єктах</h2>
+            <div class="bento">
+                <div class="card span-12">
+                    <p>Згідно з посібником “Цивільний захист” Т. М. Чорної, головною небезпекою при аварії на АЕС є радіоактивна хмара. Вплив на людину відбувається за двома сценаріями:</p>
+                </div>
+                <div class="card span-6" data-aos="flip-up">
+                    <h3>Зовнішнє опромінення</h3>
+                    <p>Дія гамма- та бета-випромінювання безпосередньо від хмари або осілих часток на ґрунті та одязі.</p>
+                </div>
+                <div class="card span-6" data-aos="flip-up" data-aos-delay="200">
+                    <h3>Внутрішнє опромінення</h3>
+                    <p>Потрапляння радіонуклідів (ізотопів цезію, стронцію та йоду) всередину організму через дихальні шляхи або з їжею та водою. Радіонукліди накопичуються в органах, створюючи тривале джерело опромінення.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="part4" style="background: #050505;">
+        <div style="width: 100%;">
+            <h2 data-aos="fade-right">4. Алгоритм захисту населення</h2>
+            <div class="bento">
+                <div class="card span-12">
+                    <p>При виникненні радіаційної небезпеки БЖД виокремлює три фундаментальні принципи захисту:</p>
+                </div>
+                <div class="card span-4" data-aos="zoom-in" data-tilt>
+                    <h3>Захист часом</h3>
+                    <p>Мінімізація терміну перебування в зоні забруднення.</p>
+                </div>
+                <div class="card span-4" data-aos="zoom-in" data-aos-delay="100" data-tilt>
+                    <h3>Захист відстанню</h3>
+                    <p>Збільшення дистанції до джерела випромінювання (інтенсивність падає пропорційно квадрату відстані).</p>
+                </div>
+                <div class="card span-4" data-aos="zoom-in" data-aos-delay="200" data-tilt>
+                    <h3>Захист бар’єром</h3>
+                    <p>Екранування: дерев’яна стіна послаблює гамма-промені вдвічі, цегляна - у 10 разів, а бетонні стіни підвалів - у 40-100 разів.</p>
+                </div>
+                <div class="card span-12 warning-box" data-aos="fade-up">
+                    <h3 style="color: var(--danger-red); border:none">Важливо про йодну профілактику:</h3>
+                    <p style="color: var(--danger-red)">Застосування препаратів стабільного йоду має на меті виключно блокування щитоподібної залози. Неконтрольоване вживання йоду без офіційного оповіщення є небезпечним для здоров'я.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <section id="conclusion">
+    <div style="width: 100%; display: flex; flex-direction: column; align-items: center;" data-aos="zoom-in">
+        <h2 style="text-align: center;">Висновок</h2>
+        
+        <div class="card" style="max-width: 900px; margin: 0 auto; border: 2px solid var(--hazard-yellow); text-align: center;">
+            <p style="text-align: center; margin: 0 auto;">
+                Радіаційна небезпека є керованим фактором за умови належної підготовки населення. 
+                Знання одиниць вимірювання, фізичних властивостей матеріалів та алгоритмів поведінки 
+                (герметизація житла, використання укриттів) дозволяє суттєво знизити ризики для життя. 
+                Як зазначають Є. П. Желібо та І. С. Сагайдак, культура безпеки починається з 
+                об’єктивного розуміння природи загрози.
+            </p>
+        </div>
+
+        <div style="margin-top: 50px; font-size: 2.5rem; font-weight: 900; color: var(--hazard-yellow); text-align: center;">
+            [ IGOR PRAIS 2026 ]
+        </div>
+    </div>
+</section>
+
+    <div class="footer">БЖД • Державний податковий університет • 2026</div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: false });
+        if (window.innerWidth > 900) {
+            VanillaTilt.init(document.querySelectorAll(".card"), { max: 5, speed: 400, glare: true, "max-glare": 0.1 });
+        }
+        window.addEventListener("scroll", () => {
+            let current = "";
+            document.querySelectorAll("section").forEach(s => {
+                if (window.pageYOffset >= s.offsetTop - 300) current = s.getAttribute("id");
+            });
+            document.querySelectorAll(".nav-link").forEach(l => {
+                l.classList.remove("active");
+                if (l.getAttribute("href").includes(current)) l.classList.add("active");
+            });
+        });
+    </script>
+</body>
+</html>
