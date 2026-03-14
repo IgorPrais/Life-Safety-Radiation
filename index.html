@@ -20,21 +20,23 @@
         html { scroll-behavior: smooth; }
         body { background-color: var(--dark-bg); color: var(--white); overflow-x: hidden; }
 
-        /* Навігація */
+        /* Навігація — Оптимізовано для мобільних */
         nav {
-            position: fixed; top: 15px; left: 50%; transform: translateX(-50%);
+            position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
             background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(15px);
-            border: 1px solid var(--hazard-yellow); padding: 5px; border-radius: 100px;
-            z-index: 1000; display: flex; gap: 5px; width: 95%; max-width: fit-content;
+            border: 1px solid var(--hazard-yellow); padding: 4px; border-radius: 100px;
+            z-index: 1000; display: flex; gap: 2px; width: 98%; max-width: fit-content;
         }
         nav a { 
             color: var(--hazard-yellow); text-decoration: none; 
-            font-size: clamp(8px, 2vw, 11px); font-weight: 900; 
-            text-transform: uppercase; padding: 10px 15px; border-radius: 100px; transition: 0.3s;
+            font-size: clamp(7px, 2.2vw, 11px); font-weight: 900; 
+            text-transform: uppercase; padding: 8px 10px; border-radius: 100px; transition: 0.3s;
+            white-space: nowrap;
         }
         nav a.active { background: var(--hazard-yellow); color: var(--dark-bg); box-shadow: 0 0 15px var(--hazard-yellow); }
 
-        section { min-height: 100vh; padding: 120px 8%; display: flex; align-items: center; justify-content: center; position: relative; }
+        /* Адаптація відступів секцій для мобільних */
+        section { min-height: 100vh; padding: 100px 5%; display: flex; align-items: center; justify-content: center; position: relative; }
 
         /* Hero */
         #hero { background: radial-gradient(circle at center, #1a1a00 0%, var(--dark-bg) 100%); border-bottom: 2px solid var(--hazard-yellow); }
@@ -62,7 +64,10 @@
 
         .footer { padding: 60px 20px; text-align: center; font-weight: 900; color: var(--hazard-yellow); opacity: 0.4; text-transform: uppercase; letter-spacing: 5px; font-size: 0.7rem; }
 
-        @media (max-width: 900px) { .span-4, .span-6 { grid-column: span 12; } }
+        @media (max-width: 900px) { 
+            .span-4, .span-6 { grid-column: span 12; } 
+            nav a { padding: 6px 8px; } /* Ще компактніше на малих екранах */
+        }
     </style>
 </head>
 <body>
@@ -77,22 +82,20 @@
     </nav>
 
     <section id="hero" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-    <div class="hero-content" data-aos="fade-up" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
-        
-        <h1 style="text-align: center;">
-            Радіаційна небезпека: <br>
-            <span class="highlight">від фізичних основ до захисту</span>
-        </h1>
+        <div class="hero-content" data-aos="fade-up" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+            <h1 style="text-align: center;">
+                Радіаційна небезпека: <br>
+                <span class="highlight">від фізичних основ до захисту</span>
+            </h1>
 
-        <div class="intro-card" data-tilt style="margin-left: auto; margin-right: auto; text-align: center; border-left: none; border-top: 10px solid var(--hazard-yellow);">
-            <h2 style="text-align: center;">Вступ</h2>
-            <p style="text-align: center; margin: 0 auto;">
-                У сучасному світі радіація є одним із найбільш вагомих техногенних факторів ризику. У курсі безпеки життєдіяльності (БЖД) іонізуюче випромінювання розглядається як конкретний фізичний чинник, що потребує чіткого розуміння його природи. Знання механізмів впливу радіації на організм та правил поведінки у разі аварій на атомних електростанціях є критично важливим для забезпечення безпеки особистості та суспільства.
-            </p>
+            <div class="intro-card" data-tilt style="margin-left: auto; margin-right: auto; text-align: center; border-left: none; border-top: 10px solid var(--hazard-yellow);">
+                <h2 style="text-align: center;">Вступ</h2>
+                <p style="text-align: center; margin: 0 auto;">
+                    У сучасному світі радіація є одним із найбільш вагомих техногенних факторів ризику. У курсі безпеки життєдіяльності (БЖД) іонізуюче випромінювання розглядається як конкретний фізичний чинник, що потребує чіткого розуміння його природи. Знання механізмів впливу радіації на організм та правил поведінки у разі аварій на атомних електростанціях є критично важливим для забезпечення безпеки особистості та суспільства.
+                </p>
+            </div>
         </div>
-
-    </div>
-</section>
+    </section>
 
     <section id="part1">
         <div style="width: 100%;">
@@ -117,8 +120,6 @@
         </div>
     </section>
 
-    
-
     <section id="part2" style="background: #050505;">
         <div style="width: 100%;">
             <h2 data-aos="fade-left">2. Біологічна дія на організм людини</h2>
@@ -140,8 +141,6 @@
             </div>
         </div>
     </section>
-
-    
 
     <section id="part3">
         <div style="width: 100%;">
@@ -189,27 +188,23 @@
         </div>
     </section>
 
-    
-
     <section id="conclusion">
-    <div style="width: 100%; display: flex; flex-direction: column; align-items: center;" data-aos="zoom-in">
-        <h2 style="text-align: center;">Висновок</h2>
-        
-        <div class="card" style="max-width: 900px; margin: 0 auto; border: 2px solid var(--hazard-yellow); text-align: center;">
-            <p style="text-align: center; margin: 0 auto;">
-                Радіаційна небезпека є керованим фактором за умови належної підготовки населення. 
-                Знання одиниць вимірювання, фізичних властивостей матеріалів та алгоритмів поведінки 
-                (герметизація житла, використання укриттів) дозволяє суттєво знизити ризики для життя. 
-                Як зазначають Є. П. Желібо та І. С. Сагайдак, культура безпеки починається з 
-                об’єктивного розуміння природи загрози.
-            </p>
+        <div style="width: 100%; display: flex; flex-direction: column; align-items: center;" data-aos="zoom-in">
+            <h2 style="text-align: center;">Висновок</h2>
+            <div class="card" style="max-width: 900px; margin: 0 auto; border: 2px solid var(--hazard-yellow); text-align: center;">
+                <p style="text-align: center; margin: 0 auto;">
+                    Радіаційна небезпека є керованим фактором за умови належної підготовки населення. 
+                    Знання одиниць вимірювання, фізичних властивостей матеріалів та алгоритмів поведінки 
+                    (герметизація житла, використання укриттів) дозволяє суттєво знизити ризики для життя. 
+                    Як зазначають Є. П. Желібо та І. С. Сагайдак, культура безпеки починається з 
+                    об’єктивного розуміння природи загрози.
+                </p>
+            </div>
+            <div style="margin-top: 50px; font-size: 2.5rem; font-weight: 900; color: var(--hazard-yellow); text-align: center;">
+                [ IGOR PRAIS 2026 ]
+            </div>
         </div>
-
-        <div style="margin-top: 50px; font-size: 2.5rem; font-weight: 900; color: var(--hazard-yellow); text-align: center;">
-            [ IGOR PRAIS 2026 ]
-        </div>
-    </div>
-</section>
+    </section>
 
     <div class="footer">БЖД • Державний податковий університет • 2026</div>
 
